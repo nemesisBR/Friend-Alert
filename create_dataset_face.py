@@ -45,6 +45,13 @@ def getFiles(path):
     return filenames, names
 
 
+def getName(match,face_names):
+    for i in range(27):
+        if match[i]:
+            return face_names[i]
+        else:
+            continue
+        
 #----Variables----
 
 face_names = []
