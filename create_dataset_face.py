@@ -44,7 +44,7 @@ def getFiles(path):
             names.append(str(filename[0:-4]))
     return filenames, names
 
-
+#----Function to get name of matched face---------
 def getName(match,face_names):
     for i in range(27):
         if match[i]:
@@ -65,6 +65,10 @@ counter1 = 0
 #-------Creating list of training filenames of known faces along with path----
 known_faces , face_names = getFiles('F:\GitHub\Friend Alert\KnownImages')
 known_faces_encoded = knownFacesCollecting(known_faces)
+
+#--------Create folders for each known images----------
+for name in face_names:
+    os.mkdir(name)
  
 
 
