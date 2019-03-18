@@ -30,7 +30,7 @@ def knownFacesCollecting(filenames):
 def storeImages(name, crop_img):
     #print("F:\Pictures\Delhi 2015\Photoshop\\" + name + str(np.random.randint(1000)) + ".png")
     print("Saved:", name)
-    cv2.imwrite("F:\Pictures\Delhi 2015\Photoshop\\" + name + str(np.random.randint(1000)) + ".png",crop_img)
+    cv2.imwrite("F:\GitHub\Friend Alert\Dataset\\" + name +"\\"+ str(np.random.randint(1000)) + ".png",crop_img)
     #print(current_path + "F:\Pictures\Delhi 2015\Photoshop\\" + name + str(np.random.randint(1000)) + ".png")
 #----Function to return all JPEG file's path in a directory
 def getFiles(path):
@@ -68,7 +68,7 @@ known_faces_encoded = knownFacesCollecting(known_faces)
 
 #--------Create folders for each known images----------
 for name in face_names:
-    os.mkdir(name)
+    os.mkdir("F:\GitHub\Friend Alert\Dataset\\" + name)
  
 
 
