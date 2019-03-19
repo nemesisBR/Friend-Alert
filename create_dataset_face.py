@@ -51,7 +51,30 @@ def getName(match,face_names):
             return face_names[i]
         else:
             continue
+
+def identify_faces(farewell_images,pNo):
+    count = pNo
+    for path in farewell_images:
+        count = count + 1
+        print(count)
+        faceNamesPhoto = []
+        face_locations = []
+        face_encodings = []
+        image = face_recognition.load_image_file(path)
+        face_locations = face_recognition.face_locations(image)
+        face_encodings = face_recognition.face_encodings(image,face_locations)
+    
+    for face_encoding in face_encodings:
+        match = face_recognition.compare_faces(known_faces_encoded,face_encoding, tolerance = 0.2)
         
+        name = getName(match, face_names)
+        faceNamesPhoto.append(name)
+    
+    for (top, right, bottom, left), name in zip(face_locations, faceNamesPhoto):
+        if not name:
+            continue
+        crop_image = image[top:bottom, left:right]
+        storeImages(name, crop_image)
 #----Variables----
 
 face_names = []
@@ -73,30 +96,11 @@ for name in face_names:
 
 
 #-------Creating list of training filenames along with path-----
-farewell_images ,file_names = getFiles('F:\Pictures\BE Photoshoot')
+farewell_images_main ,file_names = getFiles('F:\Pictures\BE Photoshoot')
 
+farewell_images1 = farewell_images_main[0:247]
+farewell_images2 = farewell_images_main[247:494]
 #-------Processing Farewell Images--------------
-count = 0
-for path in farewell_images:
-    count = count + 1
-    print(count)
-    faceNamesPhoto = []
-    face_locations = []
-    face_encodings = []
-    image = face_recognition.load_image_file(path)
-    face_locations = face_recognition.face_locations(image)
-    face_encodings = face_recognition.face_encodings(image,face_locations)
-    
-    for face_encoding in face_encodings:
-        match = face_recognition.compare_faces(known_faces_encoded,face_encoding, tolerance = 0.50)
-        
-        name = getName(match, face_names)
-        faceNamesPhoto.append(name)
-    
-    for (top, right, bottom, left), name in zip(face_locations, faceNamesPhoto):
-        if not name:
-            continue
-        crop_image = image[top:bottom, left:right]
-        storeImages(name, crop_image)
+
 
 
